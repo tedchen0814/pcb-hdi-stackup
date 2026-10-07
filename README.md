@@ -4,6 +4,8 @@
 
 ## 開啟方式
 
+線上版：https://pcb-hdi-stackup.vercel.app/
+
 以 Edge 或 Chrome 開啟 `index.html`，即可離線使用；沒有套件安裝、帳號登入或付費 API 需求。原始疊構圖已內嵌於網頁。若要使用頁面中的修訂稿連結，請讓 `review.md` 與網頁位於同一資料夾。
 
 ## 教學操作
