@@ -1,0 +1,8 @@
+# 只部署教學頁與修訂稿；原始對話、驗證工具與截圖留在 repo
+chat.md
+tools/
+verification.json
+preview-*.png
+CLAUDE.md
+工作筆記.md
+.claude/

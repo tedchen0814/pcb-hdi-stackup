@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-07",
+  "checks": [
+    "Initial structure and embedded image",
+    "Beginner and engineering explanations shown together",
+    "Layer selection, exploded view and thickness scale",
+    "Material steps and paused playback",
+    "Four distinct material illustrations and bilingual explanations",
+    "All 38 process frames, layer counts and controls",
+    "Via topology and quiz feedback",
+    "Knowledge additions and shop-floor terms",
+    "Source drawing sync, custom via route, process stats and scrub preview",
+    "Expanded quiz and stack-up puzzle",
+    "Remaining-copper slider and aspect-ratio calculator",
+    "No overflow on desktop and 390px mobile",
+    "Bilingual material frames fit mobile and SVG bounds",
+    "Reduced-motion, file:// offline and remembered preferences"
+  ],
+  "runtimeErrors": [],
+  "status": "passed"
+}
