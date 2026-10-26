@@ -69,7 +69,7 @@ async function check(name,fn){await fn();checks.push(name);console.log('PASS '+n
   assert((await page.locator('#readoutTitle').innerText()).includes('壓合'));
   await page.selectOption('#speed','2');
   assert((await page.locator('#pace').innerText()).includes('3.5 秒'));
-  await page.click('#play');await page.waitForTimeout(3900);await page.click('#play');
+  await page.click('#play');await page.waitForTimeout(4500);await page.click('#play');
   assert.equal(await page.locator('#scrub').inputValue(),'27');
  });
  await page.screenshot({path:path.join(root,'preview-process.png'),fullPage:true});
@@ -132,6 +132,21 @@ async function check(name,fn){await fn();checks.push(name);console.log('PASS '+n
   await page.click('[data-slot="0"]');await page.click('[data-slot="8"]');assert.equal(await page.locator('#pzTray [data-chip]').count(),2);
   await page.click('#pzReset');assert.equal(await page.locator('#pzTray [data-chip]').count(),9);
   await page.click('#pzHint');assert(await page.locator('#pzHintBox').isVisible());
+ });
+ await check('YouTube supplement: lazy embed, chapter jumps and readout links',async()=>{
+  assert.equal(await page.locator('#videoFrame iframe').count(),0,'No YouTube request before the viewer clicks');
+  assert.equal(await page.locator('#videoChapters [data-vt]').count(),10);
+  await page.click('[data-chapter="material"]');await page.click('[data-material="1"]');
+  assert((await page.locator('#videoRef').innerText()).includes('壓合（4:07）'));
+  await page.click('[data-chapter="process"]');await page.click('[data-proc="9"]');await page.click('#next');await page.click('#next');
+  assert((await page.locator('#videoRef').innerText()).includes('鍍通孔'));assert((await page.locator('#videoRef p').count())===1,'Microvia caveat shown');
+  await page.click('#videoRef [data-vref]');
+  assert((await page.locator('#videoFrame iframe').getAttribute('src')).includes('youtube-nocookie.com/embed/jUftTXmC_ts?start=336'));
+  assert((await page.locator('#videoNotes').innerText()).includes('過錳酸鉀'),'Readout jump selects the plated-hole notes');
+  await page.click('[data-vt="5"]');const notes=await page.locator('#videoNotes').innerText();assert(notes.includes('ENIG')&&notes.includes('本板對照'));
+  assert.equal(await page.locator('#videoNotes li').count(),3);
+  await page.click('[data-vgo="2"]');assert.equal(await page.locator('#drawing').getAttribute('data-material-stage'),'1');
+  await page.click('[data-chapter="via"]');await page.click('[data-via="single"]');assert(await page.locator('#videoRef').isHidden());
  });
  await check('Remaining-copper slider and aspect-ratio calculator',async()=>{
   const set=async(id,v)=>page.locator('#'+id).evaluate((el,v)=>{el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));},v);
