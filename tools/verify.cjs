@@ -135,6 +135,7 @@ async function check(name,fn){await fn();checks.push(name);console.log('PASS '+n
  });
  await check('YouTube supplement: lazy embed, chapter jumps and readout links',async()=>{
   assert.equal(await page.locator('#videoFrame iframe').count(),0,'No YouTube request before the viewer clicks');
+  await page.click('#videoJump');await page.waitForTimeout(900);const vt=await page.locator('#video').evaluate(el=>el.getBoundingClientRect().top);assert(Math.abs(vt)<80,'Video button scrolls to the section: '+vt);assert.equal(await page.locator('#videoFrame iframe').count(),0,'Jump does not autoplay');
   assert.equal(await page.locator('#videoChapters [data-vt]').count(),10);
   await page.click('[data-chapter="material"]');await page.click('[data-material="1"]');
   assert((await page.locator('#videoRef').innerText()).includes('壓合（4:07）'));
