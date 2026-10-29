@@ -1,3 +1,5 @@
 .claude/
 node_modules/
 mSAP_SAP_RDL/
+# 板廠 DFM 規格（供應商資料），只放本機
+assets/PCB *.md
