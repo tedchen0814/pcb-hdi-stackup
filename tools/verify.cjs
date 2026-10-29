@@ -149,6 +149,28 @@ async function check(name,fn){await fn();checks.push(name);console.log('PASS '+n
   await page.click('[data-vgo="2"]');assert.equal(await page.locator('#drawing').getAttribute('data-material-stage'),'1');
   await page.click('[data-chapter="via"]');await page.click('[data-via="single"]');assert(await page.locator('#videoRef').isHidden());
  });
+ await check('Chapter 05 fine-line processes: steps, side-by-side view and seed slider',async()=>{
+  await page.setViewportSize({width:1440,height:1100});
+  await page.click('[data-chapter="process"]');await page.click('[data-proc="25"]');for(let i=0;i<5;i++)await page.click('#next');
+  await page.click('[data-goline]');assert.equal(await page.locator('[data-chapter="line"]').getAttribute('aria-current'),'page','Process link opens chapter 05');
+  assert((await page.locator('#readoutTitle').innerText()).includes('長線路'));
+  await page.click('[data-ls="0"]');assert((await page.locator('#progressText').innerText()).includes('步驟 1 / 6'));
+  const frames=[];for(const m of ['msap','sap','asap'])for(let s=0;s<6;s++){await page.click('#sceneTools [data-lm="'+m+'"]');await page.click('[data-ls="'+s+'"]');frames.push(await page.locator('#drawing').innerHTML());assert((await page.locator('#readoutBody > .en').textContent()).length>20,'English for '+m+' step '+s);}
+  assert.equal(new Set(frames).size,18,'All 18 method-step cross-sections differ');
+  await page.click('#sceneTools [data-lm="asap"]');await page.click('[data-ls="2"]');assert((await page.locator('#readoutBody').innerText()).includes('電漿'));
+  await page.click('[data-action="compare"]');assert.equal(await page.locator('#drawing > g').count(),3,'Three columns side by side');
+  assert.equal((await page.locator('#readoutBody .zh').innerText()).split('\n').filter(Boolean).length,3);
+  await page.click('[data-ls="5"]');await page.click('#play');await page.waitForTimeout(200);await page.click('#play');
+  await page.click('[data-sp="msap"]');await page.locator('#flW').evaluate(el=>{el.value=20;el.dispatchEvent(new Event('input',{bubbles:true}));});
+  assert.equal(await page.locator('#flFW').innerText(),'12 µm');
+  await page.click('[data-sp="asap"]');assert.equal(await page.locator('#flFW').innerText(),'19.4 µm');assert((await page.locator('#flVerdict').innerText()).includes('穩定'));
+  await page.locator('#flW').evaluate(el=>{el.value=6;el.dispatchEvent(new Event('input',{bubbles:true}));});await page.click('[data-sp="msap"]');
+  assert((await page.locator('#flVerdict').innerText()).includes('蝕斷'));
+  assert.equal(await page.locator('.fl-axis a[href*="rigid-flex-pcb-course"]').count(),2,'Links to the rigid-flex plating page');
+  assert((await page.locator('#videoRef').innerText()).includes('蝕刻'));
+  assert((await page.locator('#quizProgress').innerText()).includes('/ 4'));
+  await page.click('[data-action="compare"]');
+ });
  await check('Remaining-copper slider and aspect-ratio calculator',async()=>{
   const set=async(id,v)=>page.locator('#'+id).evaluate((el,v)=>{el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));},v);
   assert((await page.locator('#cuTotal').innerText()).includes('0.772'),'70% reproduces the drawing total');
@@ -164,7 +186,7 @@ async function check(name,fn){await fn();checks.push(name);console.log('PASS '+n
  await check('No overflow on desktop and 390px mobile',async()=>{
   for(const width of [1440,768,390,320]){
    await page.setViewportSize({width,height:1000});
-   for(const chapter of ['structure','material','process','via']){
+   for(const chapter of ['structure','material','process','via','line']){
     await page.click('[data-chapter="'+chapter+'"]');
     const dimensions=await page.evaluate(()=>({w:document.documentElement.scrollWidth,v:innerWidth}));
     assert(dimensions.w<=dimensions.v+1,chapter+' overflow at '+width);
