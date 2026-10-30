@@ -251,6 +251,20 @@ v1.5 新增：
 
 ## 10. 線路工法：mSAP、SAP 與 aSAP（RDL）
 
+本節縮寫：
+
+| 縮寫 | 英文全名 | 中文 |
+|---|---|---|
+| mSAP | modified Semi-Additive Process | 改良型半加成法 |
+| SAP | Semi-Additive Process | 半加成法 |
+| aSAP | advanced Semi-Additive Process | 先進半加成法（Fraunhofer IZM 用語） |
+| RDL | Redistribution Layer | 重布線層：晶片與載板之間的細線路 |
+| ABF | Ajinomoto Build-up Film | 味之素增層膜 |
+| PID | Photo-Imageable Dielectric | 感光型絕緣層 |
+| PVD | Physical Vapor Deposition | 物理氣相沉積（濺鍍屬於此類） |
+| LDI | Laser Direct Imaging | 雷射直接成像 |
+| L/S | Line / Space | 線寬／線距 |
+
 來源：社群圖文〈電路板系列番外｜一層線路怎麼做〉三張圖卡與貼文（本機 `mSAP_SAP_RDL/`，不進 repo）。網頁依其架構重畫 SVG，不嵌入原圖。數值查證：Fraunhofer IZM〈High Density Organic Substrates for Chiplet Technologies〉（IMAPS 2024）第 6、11 頁；MacDermid Enthone〈Achieving Fine Lines and Spaces Using MSAP〉（PCD&F 2018）。ULVAC、JIEP、日月光的內容為原貼文引述，未另行查證。
 
 **和 Pattern Plating 的關係**：三種做法的第 5 步「光阻溝槽 → 電鍍長線 → 剝光阻」都是圖形電鍍，但和軟硬結合板課程〈蓋孔法 vs 圖形電鍍法〉頁的傳統 Pattern Plating 不同：傳統做法的底是一般銅箔＋薄一銅，靠鍍錫保護、鹼性蝕刻去掉背景銅；mSAP／SAP／aSAP 的底只有幾微米到幾百奈米，不鍍錫，剝光阻後直接用差異蝕刻（Fraunhofer：Differential etch；MacDermid：differential or flash etch）去底。

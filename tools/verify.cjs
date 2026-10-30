@@ -167,6 +167,8 @@ async function check(name,fn){await fn();checks.push(name);console.log('PASS '+n
   await page.locator('#flW').evaluate(el=>{el.value=6;el.dispatchEvent(new Event('input',{bubbles:true}));});await page.click('[data-sp="msap"]');
   assert((await page.locator('#flVerdict').innerText()).includes('蝕斷'));
   assert.equal(await page.locator('.fl-axis a[href*="rigid-flex-pcb-course"]').count(),2,'Links to the rigid-flex plating page');
+  assert.equal(await page.locator('.fl-gloss tr').count(),9,'Abbreviation table');assert((await page.locator('.fl-gloss').innerText()).includes('Redistribution Layer'));
+  assert((await page.locator('#drawing').textContent()).includes('Semi-Additive Process'),'Full English names in the cross-section');
   assert((await page.locator('#videoRef').innerText()).includes('蝕刻'));
   assert((await page.locator('#quizProgress').innerText()).includes('/ 4'));
   await page.click('[data-action="compare"]');

@@ -3,7 +3,7 @@
 用一張 10L any-layer HDI 疊構圖，一層一層看懂 PCB 的結構、PP／Core 材料、四次 build-up 製程、孔連接，以及細線路的 mSAP／SAP／RDL 工法。介面與解說採繁體中文／英文並列。
 
 - **線上版**：https://pcb-hdi-stackup.vercel.app/
-- **版本**：v1.5（2026-10-29）
+- **版本**：v1.5.1（2026-10-30）
 - **離線使用**：用 Edge 或 Chrome 直接開啟 `index.html`。不需要安裝套件、登入帳號或付費 API，原始疊構圖已內嵌在網頁裡。
 
 ![桌機版畫面](preview-desktop.png)
@@ -30,11 +30,25 @@
 
 ## 線路工法（第 05 章）
 
-三種細線路工法的步驟名稱一樣，差在電鍍前那層「底」：mSAP 是超薄銅箔加化學銅（2.5–5 µm），SAP 是咬粗表面上的化學銅（1–2 µm），aSAP／RDL 是電漿清孔後濺鍍的鈦＋銅（50–500 nm）。底越薄，去底時蝕得越少，線就能越細。
+三種細線路工法：**mSAP**（modified Semi-Additive Process，改良型半加成法）、**SAP**（Semi-Additive Process，半加成法）、**aSAP**（advanced Semi-Additive Process，先進半加成法，用來做先進封裝的 **RDL**，Redistribution Layer，重布線層）。三者的步驟名稱一樣，差在電鍍前那層「底」：mSAP 是超薄銅箔加化學銅（2.5–5 µm），SAP 是咬粗表面上的化學銅（1–2 µm），aSAP／RDL 是電漿清孔後濺鍍的鈦＋銅（50–500 nm）。底越薄，去底時蝕得越少，線就能越細。
 - 剖面依社群圖文〈電路板系列番外｜一層線路怎麼做〉的架構重畫成 SVG，沒有嵌入原圖。
 - 數值依 Fraunhofer IZM（IMAPS 2024）與 MacDermid（PCD&F 2018）原文查證；ULVAC、JIEP、日月光為原貼文引述。
 - 製程章的「填孔鍍銅」「形成線路」兩步有按鈕連到本章，說明 mSAP 是用同一次圖形電鍍完成填孔和長線。
 - 同樣內容也放在軟硬結合板課程網站的 `fine-line.html`（兩邊共用同一份繪圖核心）。
+- 網頁上的工法標題、演進軸、三欄並排都寫出英文全名，章末附縮寫對照表：
+
+| 縮寫 | 英文全名 | 中文 |
+|---|---|---|
+| mSAP | modified Semi-Additive Process | 改良型半加成法 |
+| SAP | Semi-Additive Process | 半加成法 |
+| aSAP | advanced Semi-Additive Process | 先進半加成法（Fraunhofer IZM 用語） |
+| RDL | Redistribution Layer | 重布線層：晶片與載板之間的細線路 |
+| ABF | Ajinomoto Build-up Film | 味之素增層膜 |
+| PID | Photo-Imageable Dielectric | 感光型絕緣層 |
+| PVD | Physical Vapor Deposition | 物理氣相沉積（濺鍍屬於此類） |
+| LDI | Laser Direct Imaging | 雷射直接成像 |
+| L/S | Line / Space | 線寬／線距 |
+
 
 ## 練習與計算工具
 
@@ -89,6 +103,7 @@ GitHub repo 連結 Vercel 專案 `pcb-hdi-stackup`，推送到 `main` 會自動�
 
 ## 版本紀錄
 
+- **v1.5.1**：第 05 章與 README 補上 mSAP、SAP、aSAP、RDL、ABF、PID、PVD、LDI、L/S 的英文全名，新增縮寫對照表。
 - **v1.5**：第 05 章「線路工法」（mSAP／SAP／aSAP 剖面、三欄並排、去底滑桿、4 題測驗），製程章連結本章。
 - **v1.4**：影片補充區塊，章節重點、本板對照與解說欄影片連結。
 - **v1.3**：原圖對照、自選路徑、製程計數器與時間軸預覽、每章 4 題測驗、疊構拼圖；合併「入門導覽／工程詳解」為單一解說，每步 7 秒。
